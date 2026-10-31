@@ -80,13 +80,6 @@
   gap: var(--space-8);
 }
 
-.movie-list__empty {
-  text-align: center;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-lg);
-  padding: var(--space-16) 0;
-}
-
 /* Responsive */
 @media (max-width: 640px) {
   .movie-list {

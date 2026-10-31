@@ -114,6 +114,11 @@ function App() {
     )
   }, [])
 
+  const handleClearFilters = useCallback(() => {
+    setSearchQuery('')
+    setGenreFilter('')
+  }, [])
+
   const handleSelectMovie = useCallback((movie) => {
     setSelectedMovie(movie)
   }, [])
@@ -186,10 +191,12 @@ function App() {
           favoriteIds={favoriteIds}
           onToggleFavorite={handleToggleFavorite}
           searchQuery={searchQuery}
+          activeQuery={debouncedSearch}
           onSearchChange={setSearchQuery}
           genres={genres}
           genreFilter={genreFilter}
           onGenreChange={setGenreFilter}
+          onClearFilters={handleClearFilters}
         />
       </main>
       <Footer />

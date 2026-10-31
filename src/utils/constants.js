@@ -35,6 +35,7 @@ export const UI_TEXT = {
   EMPTY_TITLE: 'Sin resultados',
   EMPTY_MESSAGE: 'No se encontraron películas con esos criterios.',
   NO_MOVIES: 'No hay películas disponibles en este momento.',
+  CLEAR_FILTERS: 'Limpiar filtros',
 
   FAVORITE_ADD: 'Agregar a favoritos',
   FAVORITE_REMOVE: 'Quitar de favoritos',
@@ -47,13 +48,10 @@ export const UI_TEXT = {
   TRAILER_UNAVAILABLE: 'Tráiler no disponible',
   TRAILER_IFRAME_TITLE: 'Tráiler de',
   POSTER_ALT: 'Póster de',
-  POSTER_FALLBACK_ALT: 'Póster no disponible',
   AGE_RATING_LABEL: 'Clasificación',
   RUNTIME_LABEL: 'Duración',
   SCORE_LABEL: 'Calificación',
-  SCORE_OUT_OF: 'de 5',
   RELEASE_DATE_LABEL: 'Fecha de estreno',
-  GENRES_LABEL: 'Géneros',
 
   FOOTER_PROJECT: 'Proyecto académico — DAE Semana 10',
   FOOTER_DISCLAIMER:

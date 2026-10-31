@@ -2,11 +2,13 @@ import { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import MovieCard from '../MovieCard/MovieCard'
 import MovieSearch from '../MovieSearch/MovieSearch'
+import EmptyState from '../EmptyState/EmptyState'
 import { UI_TEXT } from '../../utils/constants'
 
 /**
  * Movie grid with search and genre controls. The filtered list is derived
  * by the parent; this component only renders it and owns the reveal effect.
+ * The applied query (`activeQuery`) can lag behind the input on purpose.
  */
 function MovieList({
   movies,
@@ -14,13 +16,16 @@ function MovieList({
   favoriteIds = [],
   onToggleFavorite,
   searchQuery,
+  activeQuery = '',
   onSearchChange,
   genres,
   genreFilter,
   onGenreChange,
+  onClearFilters,
 }) {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)
+  const isFiltering = Boolean(activeQuery || genreFilter)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,7 +89,7 @@ function MovieList({
             </select>
           )}
 
-          {searchQuery && (
+          {activeQuery && (
             <span className="movie-list__results-count" aria-live="polite">
               {movies.length}{' '}
               {movies.length === 1 ? UI_TEXT.RESULTS_SINGULAR : UI_TEXT.RESULTS_PLURAL}
@@ -94,27 +99,30 @@ function MovieList({
       </div>
 
       <h2 className="movie-list__heading">
-        {searchQuery
-          ? `${UI_TEXT.RESULTS_FOR} "${searchQuery}"`
+        {activeQuery
+          ? `${UI_TEXT.RESULTS_FOR} "${activeQuery}"`
           : UI_TEXT.MOVIES_TITLE}
       </h2>
 
-      <div className="movie-list__grid">
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
-            isFavorite={favoriteIds.includes(movie.id)}
-            onToggleFavorite={onToggleFavorite}
-            onSelect={onSelect}
-          />
-        ))}
-      </div>
-
-      {movies.length === 0 && (
-        <p className="movie-list__empty">
-          {searchQuery || genreFilter ? UI_TEXT.EMPTY_MESSAGE : UI_TEXT.NO_MOVIES}
-        </p>
+      {movies.length > 0 ? (
+        <div className="movie-list__grid">
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              isFavorite={favoriteIds.includes(movie.id)}
+              onToggleFavorite={onToggleFavorite}
+              onSelect={onSelect}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyState
+          title={isFiltering ? UI_TEXT.EMPTY_TITLE : UI_TEXT.NO_MOVIES}
+          message={isFiltering ? UI_TEXT.EMPTY_MESSAGE : undefined}
+          actionLabel={isFiltering ? UI_TEXT.CLEAR_FILTERS : undefined}
+          onAction={isFiltering ? onClearFilters : undefined}
+        />
       )}
     </section>
   )
@@ -141,10 +149,12 @@ MovieList.propTypes = {
   favoriteIds: PropTypes.arrayOf(PropTypes.number),
   onToggleFavorite: PropTypes.func,
   searchQuery: PropTypes.string,
+  activeQuery: PropTypes.string,
   onSearchChange: PropTypes.func,
   genres: PropTypes.arrayOf(PropTypes.string),
   genreFilter: PropTypes.string,
   onGenreChange: PropTypes.func,
+  onClearFilters: PropTypes.func,
 }
 
 export default MovieList
