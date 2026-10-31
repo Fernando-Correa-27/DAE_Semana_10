@@ -1,0 +1,15 @@
+/* ==========================================================================
+   App Layout — Estilos del contenedor principal
+   ========================================================================== */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.app__main {
+  flex: 1;
+}

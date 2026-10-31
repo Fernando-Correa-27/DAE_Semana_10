@@ -1,0 +1,309 @@
+/* ==========================================================================
+   MovieDetail Component — Modal with Glassmorphism
+   ========================================================================== */
+
+.movie-detail__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  animation: fadeIn var(--transition-base) ease-out;
+}
+
+.movie-detail {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp var(--transition-slow) ease-out;
+  box-shadow: var(--shadow-2xl), 0 0 48px rgba(0, 0, 0, 0.6);
+}
+
+.movie-detail__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--color-text);
+  border: none;
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast);
+}
+
+.movie-detail__close:hover,
+.movie-detail__close:focus-visible {
+  background-color: var(--color-primary);
+}
+
+.movie-detail__close:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.movie-detail__content {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-8);
+  padding: var(--space-8);
+}
+
+/* Poster */
+.movie-detail__poster-wrapper {
+  flex-shrink: 0;
+}
+
+.movie-detail__poster {
+  width: 240px;
+  height: 360px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Info */
+.movie-detail__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.movie-detail__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-3xl);
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+  line-height: 1.2;
+}
+
+.movie-detail__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.movie-detail__age-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  padding: 4px 8px;
+  background-color: var(--color-age-badge);
+  color: #fff;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+.movie-detail__runtime {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.movie-detail__score {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-rating);
+  font-weight: 600;
+  font-size: var(--font-size-base);
+}
+
+.movie-detail__score-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.movie-detail__date {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.movie-detail__genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.movie-detail__genre-tag {
+  padding: 4px 12px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur-sm);
+  -webkit-backdrop-filter: var(--blur-sm);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Synopsis */
+.movie-detail__synopsis-wrapper {
+  margin-bottom: var(--space-6);
+}
+
+.movie-detail__synopsis-heading,
+.movie-detail__showtimes-heading,
+.movie-detail__trailer-heading {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+.movie-detail__synopsis {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+}
+
+/* Showtimes */
+.movie-detail__showtimes {
+  margin-bottom: var(--space-6);
+}
+
+.movie-detail__showtimes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--space-2);
+}
+
+.movie-detail__showtime-btn {
+  padding: 8px 12px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur-sm);
+  -webkit-backdrop-filter: var(--blur-sm);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.movie-detail__showtime-btn:hover,
+.movie-detail__showtime-btn:focus-visible {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+/* Trailer */
+.movie-detail__trailer {
+  margin-top: var(--space-6);
+}
+
+.movie-detail__trailer-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.movie-detail__trailer-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .movie-detail__content {
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-6);
+    gap: var(--space-6);
+  }
+
+  .movie-detail__poster-wrapper {
+    width: 100%;
+    max-width: 240px;
+  }
+
+  .movie-detail__poster {
+    width: 100%;
+    height: auto;
+    max-height: 360px;
+    object-fit: contain;
+  }
+
+  .movie-detail__title {
+    text-align: center;
+    font-size: var(--font-size-2xl);
+  }
+
+  .movie-detail__meta {
+    justify-content: center;
+  }
+
+  .movie-detail__genres {
+    justify-content: center;
+  }
+
+  .movie-detail__showtimes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-detail__backdrop {
+    padding: var(--space-3);
+  }
+
+  .movie-detail__content {
+    padding: var(--space-4);
+    gap: var(--space-4);
+  }
+
+  .movie-detail__showtimes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
