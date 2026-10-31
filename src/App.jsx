@@ -3,23 +3,28 @@ import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Hero from './components/Hero/Hero'
 import MovieList from './components/MovieList/MovieList'
-import MovieDetail from './components/MovieDetail/MovieDetail'
+import MovieDetailModal from './components/MovieDetailModal/MovieDetailModal'
 import moviesData from './data/cartelera'
 import useDebounce from './hooks/useDebounce'
+import { STORAGE_KEYS } from './utils/constants'
+import { readFavoriteIds, writeFavoriteIds } from './utils/favorites'
 
 import './styles/component-overrides.css'
 
 function App() {
   const [theme, setTheme] = useState(() => {
-    const stored = localStorage.getItem('theme')
+    const stored = localStorage.getItem(STORAGE_KEYS.THEME)
     if (stored) return stored
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   })
 
-  const [favoriteIds, setFavoriteIds] = useState([])
+  const [favoriteIds, setFavoriteIds] = useState(() =>
+    readFavoriteIds(moviesData.map((movie) => movie.id))
+  )
   const [searchQuery, setSearchQuery] = useState('')
   const [genreFilter, setGenreFilter] = useState('')
   const [selectedMovie, setSelectedMovie] = useState(null)
+  const [detailSection, setDetailSection] = useState('details')
   const [heroIndex, setHeroIndex] = useState(0)
   const debouncedSearch = useDebounce(searchQuery, 300)
 
@@ -62,14 +67,19 @@ function App() {
   // Theme effect
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
+    localStorage.setItem(STORAGE_KEYS.THEME, theme)
   }, [theme])
+
+  // Persist favorites after their lazy initial read
+  useEffect(() => {
+    writeFavoriteIds(favoriteIds)
+  }, [favoriteIds])
 
   // Detect system preference changes
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handler = (e) => {
-      if (!localStorage.getItem('theme')) {
+      if (!localStorage.getItem(STORAGE_KEYS.THEME)) {
         setTheme(e.matches ? 'dark' : 'light')
       }
     }
@@ -121,6 +131,12 @@ function App() {
 
   const handleSelectMovie = useCallback((movie) => {
     setSelectedMovie(movie)
+    setDetailSection('details')
+  }, [])
+
+  const handleShowTrailer = useCallback((movie) => {
+    setSelectedMovie(movie)
+    setDetailSection('trailer')
   }, [])
 
   const handleCloseDetail = useCallback(() => {
@@ -164,35 +180,28 @@ function App() {
 
   return (
     <div className="app">
-      <Header
-        theme={theme}
-        onToggleTheme={toggleTheme}
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        genres={genres}
-        genreFilter={genreFilter}
-        onGenreChange={setGenreFilter}
-      />
+      <Header theme={theme} onToggleTheme={toggleTheme} />
       <main className="app__main">
         <Hero
           movies={carouselMovies}
           currentIndex={heroIndex}
           onSelect={handleSelectMovie}
+          onTrailer={handleShowTrailer}
           onSelectIndex={setHeroIndex}
           onNext={handleNextSlide}
           onPrev={handlePrevSlide}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
         />
         <MovieList
           movies={filteredMovies}
           onSelect={handleSelectMovie}
           favoriteIds={favoriteIds}
           onToggleFavorite={handleToggleFavorite}
-          searchQuery={searchQuery}
           activeQuery={debouncedSearch}
-          onSearchChange={setSearchQuery}
           genres={genres}
           genreFilter={genreFilter}
           onGenreChange={setGenreFilter}
@@ -201,11 +210,11 @@ function App() {
       </main>
       <Footer />
 
-      {/* Movie Detail Modal */}
       {selectedMovie && (
-        <MovieDetail
+        <MovieDetailModal
           movie={selectedMovie}
           onClose={handleCloseDetail}
+          initialSection={detailSection}
         />
       )}
     </div>

@@ -1,3 +1,8 @@
+export const STORAGE_KEYS = {
+  THEME: 'theme',
+  FAVORITES: 'favorites',
+}
+
 /**
  * User-facing copy. Keys stay in English and values in Spanish so the
  * interface can be translated without touching component logic.
@@ -48,10 +53,13 @@ export const UI_TEXT = {
   TRAILER_UNAVAILABLE: 'Tráiler no disponible',
   TRAILER_IFRAME_TITLE: 'Tráiler de',
   POSTER_ALT: 'Póster de',
+  POSTER_FALLBACK_ALT: 'Póster no disponible',
   AGE_RATING_LABEL: 'Clasificación',
   RUNTIME_LABEL: 'Duración',
   SCORE_LABEL: 'Calificación',
+  SCORE_OUT_OF: 'de 5',
   RELEASE_DATE_LABEL: 'Fecha de estreno',
+  GENRES_LABEL: 'Géneros',
 
   FOOTER_PROJECT: 'Proyecto académico — DAE Semana 10',
   FOOTER_DISCLAIMER:
