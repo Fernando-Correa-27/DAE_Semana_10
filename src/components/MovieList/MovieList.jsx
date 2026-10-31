@@ -11,6 +11,8 @@ import { UI_TEXT } from '../../utils/constants'
 function MovieList({
   movies,
   onSelect,
+  favoriteIds = [],
+  onToggleFavorite,
   searchQuery,
   onSearchChange,
   genres,
@@ -131,7 +133,13 @@ function MovieList({
 
       <div className="movie-list__grid">
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} onSelect={onSelect} />
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            isFavorite={favoriteIds.includes(movie.id)}
+            onToggleFavorite={onToggleFavorite}
+            onSelect={onSelect}
+          />
         ))}
       </div>
 
@@ -162,6 +170,8 @@ MovieList.propTypes = {
     })
   ).isRequired,
   onSelect: PropTypes.func,
+  favoriteIds: PropTypes.arrayOf(PropTypes.number),
+  onToggleFavorite: PropTypes.func,
   searchQuery: PropTypes.string,
   onSearchChange: PropTypes.func,
   genres: PropTypes.arrayOf(PropTypes.string),

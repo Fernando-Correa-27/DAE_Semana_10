@@ -1,9 +1,14 @@
 import PropTypes from 'prop-types'
+import Button from '../Button/Button'
+import { UI_TEXT } from '../../utils/constants'
 
 /**
- * MovieCard — Tarjeta individual de película
+ * Stateless movie card. Favorites and details are controlled by the parent
+ * through callbacks; the card never stores its own state.
  */
-function MovieCard({ movie }) {
+function MovieCard({ movie, isFavorite = false, onToggleFavorite }) {
+  const favoriteLabel = isFavorite ? UI_TEXT.FAVORITE_REMOVE : UI_TEXT.FAVORITE_ADD
+
   const stars = Array.from({ length: 5 }, (_, i) => (
     <svg
       key={i}
@@ -25,6 +30,28 @@ function MovieCard({ movie }) {
           className="movie-card__image"
         />
         <span className="movie-card__age-badge">{movie.ageRating}</span>
+        <Button
+          variant="ghost"
+          iconOnly
+          className="movie-card__favorite"
+          onClick={() => onToggleFavorite?.(movie.id)}
+          aria-label={favoriteLabel}
+          title={favoriteLabel}
+          aria-pressed={isFavorite}
+        >
+          <svg
+            className="movie-card__favorite-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill={isFavorite ? 'currentColor' : 'none'}
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+        </Button>
         <div className="movie-card__overlay">
           <div className="movie-card__score-overlay">
             <svg className="movie-card__score-overlay-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -65,12 +92,14 @@ MovieCard.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
     synopsis: PropTypes.string.isRequired,
     ageRating: PropTypes.string.isRequired,
     score: PropTypes.number.isRequired,
     showtimes: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
+  isFavorite: PropTypes.bool,
+  onToggleFavorite: PropTypes.func,
 }
 
 export default MovieCard

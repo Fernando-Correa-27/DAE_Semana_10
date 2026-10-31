@@ -15,6 +15,7 @@ function App() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   })
 
+  const [favoriteIds, setFavoriteIds] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
   const [genreFilter, setGenreFilter] = useState('')
   const [selectedMovie, setSelectedMovie] = useState(null)
@@ -102,6 +103,14 @@ function App() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
   }, [])
 
+  const handleToggleFavorite = useCallback((movieId) => {
+    setFavoriteIds((prev) =>
+      prev.includes(movieId)
+        ? prev.filter((id) => id !== movieId)
+        : [...prev, movieId]
+    )
+  }, [])
+
   const handleSelectMovie = useCallback((movie) => {
     setSelectedMovie(movie)
   }, [])
@@ -171,6 +180,8 @@ function App() {
         <MovieList
           movies={filteredMovies}
           onSelect={handleSelectMovie}
+          favoriteIds={favoriteIds}
+          onToggleFavorite={handleToggleFavorite}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
           genres={genres}
