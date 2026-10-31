@@ -1,10 +1,11 @@
 /* ==========================================================================
-   Design Tokens — Variables CSS globales
+   Design tokens - global CSS custom properties
+   Brand: dark cinematic red, gold rating accent, glass surfaces.
    ========================================================================== */
 
-/* ---- Dark theme (base) ---- */
+/* ---- Dark theme (default) ---- */
 :root {
-  /* Colores — tema oscuro cinematográfico mejorado */
+  /* Brand and semantic colors */
   --color-primary: #e50914;
   --color-primary-hover: #ff1a25;
   --color-primary-glow: rgba(229, 9, 20, 0.4);
@@ -21,6 +22,13 @@
   --color-rating: #f5c518;
   --color-rating-glow: rgba(245, 197, 24, 0.3);
   --color-age-badge: #e50914;
+  --color-on-primary: #ffffff;
+  --color-on-secondary: #1e1e2f;
+  --color-focus-ring: #60a5fa;
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
+  --color-overlay: rgba(0, 0, 0, 0.78);
+  --color-overlay-soft: rgba(0, 0, 0, 0.55);
   --color-hero-overlay: linear-gradient(
     to top,
     rgba(11, 11, 15, 1) 0%,
@@ -29,22 +37,32 @@
     rgba(11, 11, 15, 0.2) 100%
   );
 
-  /* Efectos glassmorphism */
+  /* Form controls */
+  --color-input-bg: #161622;
+  --color-input-border: #2a2a3e;
+  --color-input-placeholder: #707080;
+
+  /* Glass effects */
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
+  --color-chip-bg: rgba(255, 255, 255, 0.05);
+  --color-chip-border: rgba(255, 255, 255, 0.1);
 
-  /* Sombras */
+  /* Shadows */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
   --shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.7);
+  --shadow-2xl: 0 28px 72px rgba(0, 0, 0, 0.8);
   --shadow-glow: 0 0 24px var(--color-primary-glow);
   --shadow-star-glow: 0 0 12px var(--color-rating-glow);
 
-  /* Transiciones */
+  /* Motion */
   --transition-fast: 150ms ease;
   --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration: 300ms;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Blur */
   --blur-sm: blur(8px);
@@ -53,15 +71,28 @@
   /* Layout */
   --max-width: 1200px;
   --header-height: 64px;
+  --modal-max-width: 960px;
+  --modal-max-height: min(90vh, 860px);
+  --space-9: 2.25rem;
 
-  /* Animation tokens */
-  --animation-duration: 300ms;
-  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Layering */
+  --z-index-header: 100;
+  --z-index-modal: 1000;
+  --z-index-toast: 1100;
+
+  /* Icon and control sizing */
+  --icon-xs: 12px;
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+  --icon-xl: 32px;
+  --control-height-sm: 2.25rem;
+  --control-height-md: 2.75rem;
+  --control-height-lg: 3.25rem;
 }
 
 /* ---- Light theme (pastel) ---- */
 [data-theme='light'] {
-  /* Pastel palette — lavender header, mint/celeste/pink accents */
   --color-primary: #7c3aed;
   --color-primary-hover: #6d28d9;
   --color-primary-glow: rgba(124, 58, 237, 0.2);
@@ -78,6 +109,11 @@
   --color-rating: #b8860b;
   --color-rating-glow: rgba(184, 134, 11, 0.2);
   --color-age-badge: #dc2626;
+  --color-on-primary: #ffffff;
+  --color-on-secondary: #1a1a2e;
+  --color-focus-ring: #6d28d9;
+  --color-overlay: rgba(20, 16, 32, 0.72);
+  --color-overlay-soft: rgba(20, 16, 32, 0.45);
   --color-hero-overlay: linear-gradient(
     to top,
     rgba(245, 240, 248, 1) 0%,
@@ -86,21 +122,27 @@
     rgba(245, 240, 248, 0.15) 100%
   );
 
+  --color-input-bg: #ffffff;
+  --color-input-border: #d8d0e0;
+  --color-input-placeholder: #6b6b80;
+
   --glass-bg: rgba(124, 58, 237, 0.06);
   --glass-border: rgba(124, 58, 237, 0.15);
+  --color-chip-bg: rgba(124, 58, 237, 0.08);
+  --color-chip-border: rgba(124, 58, 237, 0.18);
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
   --shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.15);
+  --shadow-2xl: 0 28px 72px rgba(0, 0, 0, 0.22);
   --shadow-glow: 0 0 24px var(--color-primary-glow);
   --shadow-star-glow: 0 0 12px var(--color-rating-glow);
 }
 
-/* ---- Typography ---- */
+/* ---- Typography and spacing ---- */
 :root,
 [data-theme='light'] {
-  /* Righteous (headings) + Poppins (body) — Music / Entertainment pairing */
   --font-family-heading: 'Righteous', 'Inter', 'Segoe UI', system-ui, sans-serif;
   --font-family-body: 'Poppins', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
   --font-size-xs: 0.75rem;
@@ -111,12 +153,12 @@
   --font-size-2xl: 2rem;
   --font-size-3xl: 2.75rem;
   --font-size-4xl: 3.5rem;
+  --font-size-5xl: 4.5rem;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* Espaciado */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -129,7 +171,6 @@
   --space-16: 4rem;
   --space-20: 5rem;
 
-  /* Bordes */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.875rem;
@@ -152,5 +193,6 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
