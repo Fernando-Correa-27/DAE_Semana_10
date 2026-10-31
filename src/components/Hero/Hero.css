@@ -150,7 +150,14 @@
   display: flex;
   gap: var(--space-3);
   flex-wrap: wrap;
+  align-items: center;
   animation: fadeInUp 0.5s ease-out 0.4s both;
+}
+
+.hero__search {
+  flex: 1 1 280px;
+  max-width: 420px;
+  min-width: 220px;
 }
 
 .hero__btn {
@@ -327,6 +334,11 @@
   .hero__btn {
     padding: 10px 20px;
     font-size: var(--font-size-sm);
+  }
+
+  .hero__search {
+    flex-basis: 100%;
+    max-width: 100%;
   }
 }
 

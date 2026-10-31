@@ -1,23 +1,20 @@
 import { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import MovieCard from '../MovieCard/MovieCard'
-import MovieSearch from '../MovieSearch/MovieSearch'
 import EmptyState from '../EmptyState/EmptyState'
 import { UI_TEXT } from '../../utils/constants'
 
 /**
- * Movie grid with search and genre controls. The filtered list is derived
- * by the parent; this component only renders it and owns the reveal effect.
- * The applied query (`activeQuery`) can lag behind the input on purpose.
+ * Movie grid with genre controls. The filtered list and the applied search
+ * term are derived by the parent; this component only renders them and owns
+ * the reveal effect.
  */
 function MovieList({
   movies,
   onSelect,
   favoriteIds = [],
   onToggleFavorite,
-  searchQuery,
   activeQuery = '',
-  onSearchChange,
   genres,
   genreFilter,
   onGenreChange,
@@ -64,14 +61,6 @@ function MovieList({
       }}
     >
       <div className="movie-list__controls">
-        <div className="movie-list__search-bar">
-          <MovieSearch
-            id="movie-list-search"
-            value={searchQuery}
-            onChange={onSearchChange}
-          />
-        </div>
-
         <div className="movie-list__filter-row">
           {genres?.length > 0 && (
             <select
@@ -112,7 +101,7 @@ function MovieList({
               movie={movie}
               isFavorite={favoriteIds.includes(movie.id)}
               onToggleFavorite={onToggleFavorite}
-              onSelect={onSelect}
+              onShowDetails={onSelect}
             />
           ))}
         </div>
@@ -148,9 +137,7 @@ MovieList.propTypes = {
   onSelect: PropTypes.func,
   favoriteIds: PropTypes.arrayOf(PropTypes.number),
   onToggleFavorite: PropTypes.func,
-  searchQuery: PropTypes.string,
   activeQuery: PropTypes.string,
-  onSearchChange: PropTypes.func,
   genres: PropTypes.arrayOf(PropTypes.string),
   genreFilter: PropTypes.string,
   onGenreChange: PropTypes.func,

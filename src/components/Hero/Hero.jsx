@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import Button from '../Button/Button'
+import MovieSearch from '../MovieSearch/MovieSearch'
 import { UI_TEXT } from '../../utils/constants'
 
 /**
@@ -10,12 +11,15 @@ function Hero({
   movies,
   currentIndex,
   onSelect,
+  onTrailer,
   onSelectIndex,
   onNext,
   onPrev,
   onTouchStart,
   onTouchMove,
   onTouchEnd,
+  searchQuery = '',
+  onSearchChange,
 }) {
   if (!movies || movies.length === 0) return null
 
@@ -76,16 +80,22 @@ function Hero({
             >
               {UI_TEXT.SEE_DETAILS}
             </Button>
-            {movie.trailer && (
-              <a
-                href={movie.trailer}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hero__btn hero__btn--ghost"
-              >
-                {UI_TEXT.TRAILER}
-              </a>
-            )}
+            <Button
+              variant="ghost"
+              size="lg"
+              className="hero__btn hero__btn--ghost"
+              onClick={() => onTrailer?.(movie)}
+            >
+              {UI_TEXT.TRAILER}
+            </Button>
+            <div className="hero__search">
+              <MovieSearch
+                id="hero-search"
+                size="lg"
+                value={searchQuery}
+                onChange={onSearchChange}
+              />
+            </div>
           </div>
 
           {movies.length > 1 && (
@@ -174,12 +184,15 @@ Hero.propTypes = {
   ).isRequired,
   currentIndex: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
+  onTrailer: PropTypes.func,
   onSelectIndex: PropTypes.func,
   onNext: PropTypes.func.isRequired,
   onPrev: PropTypes.func.isRequired,
   onTouchStart: PropTypes.func,
   onTouchMove: PropTypes.func,
   onTouchEnd: PropTypes.func,
+  searchQuery: PropTypes.string,
+  onSearchChange: PropTypes.func,
 }
 
 export default Hero

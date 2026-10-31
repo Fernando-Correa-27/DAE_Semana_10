@@ -1,21 +1,11 @@
 import PropTypes from 'prop-types'
 import Button from '../Button/Button'
-import MovieSearch from '../MovieSearch/MovieSearch'
 import { UI_TEXT } from '../../utils/constants'
 
 /**
- * Site header with brand, primary navigation, search entry point,
- * genre filter and theme switch.
+ * Site header with brand, primary navigation and theme switch.
  */
-function Header({
-  theme,
-  onToggleTheme,
-  searchQuery,
-  onSearchChange,
-  genres,
-  genreFilter,
-  onGenreChange,
-}) {
+function Header({ theme, onToggleTheme }) {
   const themeLabel = theme === 'dark' ? UI_TEXT.THEME_TO_LIGHT : UI_TEXT.THEME_TO_DARK
 
   return (
@@ -41,30 +31,6 @@ function Header({
         </nav>
 
         <div className="header__actions">
-          <div className="header__search">
-            <MovieSearch
-              id="header-search"
-              value={searchQuery}
-              onChange={onSearchChange}
-            />
-          </div>
-
-          {genres?.length > 0 && (
-            <select
-              className="header__filter-select"
-              value={genreFilter}
-              onChange={(event) => onGenreChange(event.target.value)}
-              aria-label={UI_TEXT.GENRE_FILTER_LABEL}
-            >
-              <option value="">{UI_TEXT.ALL_GENRES}</option>
-              {genres.map((genre) => (
-                <option key={genre} value={genre}>
-                  {genre}
-                </option>
-              ))}
-            </select>
-          )}
-
           <Button
             variant="ghost"
             iconOnly
@@ -92,11 +58,6 @@ function Header({
 Header.propTypes = {
   theme: PropTypes.oneOf(['dark', 'light']),
   onToggleTheme: PropTypes.func,
-  searchQuery: PropTypes.string,
-  onSearchChange: PropTypes.func,
-  genres: PropTypes.arrayOf(PropTypes.string),
-  genreFilter: PropTypes.string,
-  onGenreChange: PropTypes.func,
 }
 
 export default Header

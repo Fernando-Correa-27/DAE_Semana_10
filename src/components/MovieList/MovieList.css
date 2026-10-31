@@ -15,11 +15,6 @@
   margin-bottom: var(--space-8);
 }
 
-.movie-list__search-bar {
-  flex: 1;
-  max-width: 400px;
-}
-
 .movie-list__filter-row {
   display: flex;
   align-items: center;
@@ -84,10 +79,6 @@
 @media (max-width: 640px) {
   .movie-list {
     padding: var(--space-8) var(--space-4);
-  }
-
-  .movie-list__search-bar {
-    max-width: 100%;
   }
 
   .movie-list__filter-select {

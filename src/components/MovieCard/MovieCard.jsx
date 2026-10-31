@@ -6,7 +6,7 @@ import { UI_TEXT } from '../../utils/constants'
  * Stateless movie card. Favorites and details are controlled by the parent
  * through callbacks; the card never stores its own state.
  */
-function MovieCard({ movie, isFavorite = false, onToggleFavorite }) {
+function MovieCard({ movie, isFavorite = false, onToggleFavorite, onShowDetails }) {
   const favoriteLabel = isFavorite ? UI_TEXT.FAVORITE_REMOVE : UI_TEXT.FAVORITE_ADD
 
   const stars = Array.from({ length: 5 }, (_, i) => (
@@ -83,6 +83,16 @@ function MovieCard({ movie, isFavorite = false, onToggleFavorite }) {
             ))}
           </div>
         </div>
+
+        <Button
+          variant="secondary"
+          size="sm"
+          fullWidth
+          className="movie-card__details"
+          onClick={() => onShowDetails?.(movie)}
+        >
+          {UI_TEXT.SEE_DETAILS}
+        </Button>
       </div>
     </article>
   )
@@ -100,6 +110,7 @@ MovieCard.propTypes = {
   }).isRequired,
   isFavorite: PropTypes.bool,
   onToggleFavorite: PropTypes.func,
+  onShowDetails: PropTypes.func,
 }
 
 export default MovieCard
