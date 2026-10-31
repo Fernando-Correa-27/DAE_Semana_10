@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import Button from '../Button/Button'
+import MovieSearch from '../MovieSearch/MovieSearch'
 import { UI_TEXT } from '../../utils/constants'
 
 /**
@@ -41,39 +42,11 @@ function Header({
 
         <div className="header__actions">
           <div className="header__search">
-            <svg className="header__search-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-            </svg>
-            <input
-              type="search"
-              className="header__search-input"
-              placeholder={UI_TEXT.SEARCH_PLACEHOLDER}
+            <MovieSearch
+              id="header-search"
               value={searchQuery}
-              onChange={(event) => onSearchChange(event.target.value)}
-              aria-label={UI_TEXT.SEARCH_LABEL}
+              onChange={onSearchChange}
             />
-            {searchQuery && (
-              <Button
-                variant="ghost"
-                size="sm"
-                iconOnly
-                className="header__search-clear"
-                onClick={() => onSearchChange('')}
-                aria-label={UI_TEXT.SEARCH_CLEAR}
-              >
-                <svg
-                  className="btn__icon"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                >
-                  <path d="M6 6l12 12M18 6L6 18" />
-                </svg>
-              </Button>
-            )}
           </div>
 
           {genres?.length > 0 && (

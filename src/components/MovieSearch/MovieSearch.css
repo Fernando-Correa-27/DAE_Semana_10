@@ -1,0 +1,91 @@
+/* ==========================================================================
+   MovieSearch - controlled search field with optional glass treatment
+   ========================================================================== */
+
+.movie-search {
+  position: relative;
+  width: 100%;
+}
+
+.movie-search__input {
+  width: 100%;
+  min-height: var(--control-height-md);
+  padding: var(--space-2) var(--space-12) var(--space-2) var(--space-10);
+  color: var(--color-text);
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-full);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.movie-search__input::-webkit-search-cancel-button,
+.movie-search__input::-webkit-search-decoration {
+  display: none;
+}
+
+.movie-search__input:hover {
+  border-color: var(--color-primary);
+}
+
+.movie-search__input:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+  outline: none;
+}
+
+.movie-search__icon {
+  position: absolute;
+  top: 50%;
+  left: var(--space-3);
+  width: var(--icon-md);
+  height: var(--icon-md);
+  color: var(--color-text-muted);
+  fill: currentColor;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.movie-search__clear {
+  position: absolute;
+  top: 50%;
+  right: var(--space-1);
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  transform: translateY(-50%);
+}
+
+.movie-search--lg .movie-search__input {
+  min-height: var(--control-height-lg);
+  padding-left: calc(var(--space-10) + var(--space-2));
+  font-size: var(--font-size-lg);
+  background-color: var(--glass-bg);
+  border-color: var(--glass-border);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: var(--blur-sm);
+  -webkit-backdrop-filter: var(--blur-sm);
+}
+
+.movie-search--lg .movie-search__icon {
+  left: var(--space-4);
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+.movie-search--lg .movie-search__clear {
+  right: var(--space-2);
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+}
+
+@media (min-width: 768px) {
+  .movie-search__input {
+    padding-left: var(--space-10);
+  }
+}

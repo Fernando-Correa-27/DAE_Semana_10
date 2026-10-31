@@ -104,69 +104,7 @@
 
 /* Search */
 .header__search {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.header__search-icon {
-  position: absolute;
-  left: var(--space-3);
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  fill: var(--color-text-muted);
-  pointer-events: none;
-}
-
-.header__search-input {
   width: 180px;
-  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-9);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  color: var(--color-text);
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), width var(--transition-base);
-}
-
-.header__search-input::placeholder {
-  color: var(--color-text-muted);
-}
-
-.header__search-input:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-glow);
-  width: 220px;
-}
-
-.header__search-clear {
-  position: absolute;
-  right: var(--space-1);
-  top: 50%;
-  transform: translateY(-50%);
-  width: 28px;
-  min-width: 28px;
-  height: 28px;
-  min-height: 28px;
-  border-radius: var(--radius-full);
-  background-color: var(--color-surface-hover);
-  border: none;
-  color: var(--color-text-muted);
-  font-size: 11px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
-}
-
-.header__search-clear:hover {
-  background-color: var(--color-primary);
-  color: #fff;
 }
 
 /* Genre Filter */
@@ -227,12 +165,8 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .header__search-input {
+  .header__search {
     width: 150px;
-  }
-
-  .header__search-input:focus {
-    width: 180px;
   }
 }
 
@@ -250,12 +184,8 @@
     gap: var(--space-2);
   }
 
-  .header__search-input {
+  .header__search {
     width: 130px;
-  }
-
-  .header__search-input:focus {
-    width: 150px;
   }
 
   .header__filter-select {
