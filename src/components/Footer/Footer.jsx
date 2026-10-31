@@ -1,27 +1,21 @@
-import PropTypes from 'prop-types'
+import { UI_TEXT } from '../../utils/constants'
+
+const CURRENT_YEAR = new Date().getFullYear()
 
 /**
- * Footer — Pie de página con información del sitio
+ * Static site footer.
  */
 function Footer() {
-  const currentYear = new Date().getFullYear()
-
   return (
     <footer className="footer" id="footer">
       <div className="footer__container">
         <p className="footer__text">
-          &copy; {currentYear} Cartelera de Cine. Proyecto académico — DAE Semana 9
+          &copy; {CURRENT_YEAR} {UI_TEXT.APP_TITLE}. {UI_TEXT.FOOTER_PROJECT}
         </p>
-        <p className="footer__text footer__text--muted">
-          Todos los datos mostrados son ficticios y utilizados con fines educativos.
-        </p>
+        <p className="footer__text footer__text--muted">{UI_TEXT.FOOTER_DISCLAIMER}</p>
       </div>
     </footer>
   )
-}
-
-Footer.propTypes = {
-  /* No props — component is static */
 }
 
 export default Footer

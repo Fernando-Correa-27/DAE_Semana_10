@@ -20,7 +20,6 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState(null)
   const [heroIndex, setHeroIndex] = useState(0)
 
-  const featured = useMemo(() => moviesData.find((m) => m.featured) || null, [])
   const list = useMemo(() => moviesData.filter((m) => !m.featured), [])
 
   // All movies for carousel
@@ -162,6 +161,7 @@ function App() {
           movies={carouselMovies}
           currentIndex={heroIndex}
           onSelect={handleSelectMovie}
+          onSelectIndex={setHeroIndex}
           onNext={handleNextSlide}
           onPrev={handlePrevSlide}
           onTouchStart={handleTouchStart}

@@ -1,9 +1,12 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import MovieCard from '../MovieCard/MovieCard'
+import Button from '../Button/Button'
+import { UI_TEXT } from '../../utils/constants'
 
 /**
- * MovieList — Lista de películas con búsqueda, filtro y scroll animations
+ * Movie grid with search and genre controls. The filtered list is derived
+ * by the parent; this component only renders it and owns the reveal effect.
  */
 function MovieList({
   movies,
@@ -41,11 +44,6 @@ function MovieList({
     }
   }, [])
 
-  // Count all movies for total display
-  const totalMovies = useMemo(() => {
-    return movies.length
-  }, [movies])
-
   return (
     <section
       className="movie-list"
@@ -58,7 +56,6 @@ function MovieList({
         transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
       }}
     >
-      {/* Search & Filter Controls */}
       <div className="movie-list__controls">
         <div className="movie-list__search-bar">
           <svg
@@ -71,31 +68,44 @@ function MovieList({
           <input
             type="search"
             className="movie-list__search-input"
-            placeholder="Buscar películas..."
+            placeholder={UI_TEXT.SEARCH_PLACEHOLDER}
             value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            aria-label="Buscar películas"
+            onChange={(event) => onSearchChange(event.target.value)}
+            aria-label={UI_TEXT.SEARCH_LABEL}
           />
           {searchQuery && (
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
+              iconOnly
               className="movie-list__search-clear"
               onClick={() => onSearchChange('')}
-              aria-label="Limpiar búsqueda"
+              aria-label={UI_TEXT.SEARCH_CLEAR}
             >
-              ✕
-            </button>
+              <svg
+                className="btn__icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </Button>
           )}
         </div>
 
         <div className="movie-list__filter-row">
-          {genres && genres.length > 0 && (
+          {genres?.length > 0 && (
             <select
               className="movie-list__filter-select"
               value={genreFilter}
-              onChange={(e) => onGenreChange(e.target.value)}
-              aria-label="Filtrar por género"
+              onChange={(event) => onGenreChange(event.target.value)}
+              aria-label={UI_TEXT.GENRE_FILTER_LABEL}
             >
-              <option value="">Todos los géneros</option>
+              <option value="">{UI_TEXT.ALL_GENRES}</option>
               {genres.map((genre) => (
                 <option key={genre} value={genre}>
                   {genre}
@@ -105,32 +115,29 @@ function MovieList({
           )}
 
           {searchQuery && (
-            <span className="movie-list__results-count">
-              {totalMovies} resultado{totalMovies !== 1 ? 's' : ''} encontrado
-              {totalMovies !== 1 ? 's' : ''}
+            <span className="movie-list__results-count" aria-live="polite">
+              {movies.length}{' '}
+              {movies.length === 1 ? UI_TEXT.RESULTS_SINGULAR : UI_TEXT.RESULTS_PLURAL}
             </span>
           )}
         </div>
       </div>
 
-      {/* Heading */}
       <h2 className="movie-list__heading">
-        {searchQuery ? `Resultados para "${searchQuery}"` : 'En cartelera'}
+        {searchQuery
+          ? `${UI_TEXT.RESULTS_FOR} "${searchQuery}"`
+          : UI_TEXT.MOVIES_TITLE}
       </h2>
 
-      {/* Movie Grid */}
       <div className="movie-list__grid">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} onSelect={onSelect} />
         ))}
       </div>
 
-      {/* Empty State */}
       {movies.length === 0 && (
         <p className="movie-list__empty">
-          {searchQuery || genreFilter
-            ? 'No se encontraron películas con esos criterios.'
-            : 'No hay películas disponibles en este momento.'}
+          {searchQuery || genreFilter ? UI_TEXT.EMPTY_MESSAGE : UI_TEXT.NO_MOVIES}
         </p>
       )}
     </section>
@@ -142,7 +149,8 @@ MovieList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
+      poster: PropTypes.string.isRequired,
+      backdrop: PropTypes.string,
       synopsis: PropTypes.string.isRequired,
       ageRating: PropTypes.string.isRequired,
       score: PropTypes.number.isRequired,
