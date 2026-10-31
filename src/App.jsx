@@ -5,6 +5,7 @@ import Hero from './components/Hero/Hero'
 import MovieList from './components/MovieList/MovieList'
 import MovieDetail from './components/MovieDetail/MovieDetail'
 import moviesData from './data/cartelera'
+import useDebounce from './hooks/useDebounce'
 
 import './styles/component-overrides.css'
 
@@ -20,6 +21,7 @@ function App() {
   const [genreFilter, setGenreFilter] = useState('')
   const [selectedMovie, setSelectedMovie] = useState(null)
   const [heroIndex, setHeroIndex] = useState(0)
+  const debouncedSearch = useDebounce(searchQuery, 300)
 
   const list = useMemo(() => moviesData.filter((m) => !m.featured), [])
 
@@ -41,11 +43,12 @@ function App() {
   const filteredMovies = useMemo(() => {
     let filtered = list
 
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase()
-      filtered = filtered.filter((m) =>
-        m.title.toLowerCase().includes(query) ||
-        m.synopsis.toLowerCase().includes(query)
+    if (debouncedSearch.trim()) {
+      const query = debouncedSearch.toLowerCase()
+      filtered = filtered.filter(
+        (m) =>
+          m.title.toLowerCase().includes(query) ||
+          m.synopsis.toLowerCase().includes(query)
       )
     }
 
@@ -54,7 +57,7 @@ function App() {
     }
 
     return filtered
-  }, [list, searchQuery, genreFilter])
+  }, [list, debouncedSearch, genreFilter])
 
   // Theme effect
   useEffect(() => {
