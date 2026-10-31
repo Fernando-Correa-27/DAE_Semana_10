@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 750" role="img" aria-labelledby="fallbackTitle fallbackDesc">
+  <title id="fallbackTitle">Póster no disponible</title>
+  <desc id="fallbackDesc">Ilustración de una claqueta de cine sobre un fondo oscuro.</desc>
+  <rect width="500" height="750" fill="#161622" />
+  <rect x="18" y="18" width="464" height="714" rx="18" fill="none" stroke="#2a2a3e" stroke-width="3" />
+  <g fill="none" stroke="#e50914" stroke-linecap="round" stroke-linejoin="round" stroke-width="14">
+    <rect x="126" y="292" width="248" height="166" rx="14" />
+    <path d="M126 336h248M166 292l-26 44M226 292l-26 44M286 292l-26 44M346 292l-26 44" />
+  </g>
+  <circle cx="250" cy="392" r="34" fill="#e50914" opacity="0.16" />
+  <path d="m242 374 32 18-32 18z" fill="#e50914" />
+  <text x="250" y="522" fill="#f0f0f5" font-family="Poppins, Segoe UI, sans-serif" font-size="28" font-weight="600" text-anchor="middle">
+    Póster no disponible
+  </text>
+  <text x="250" y="562" fill="#b0b0c0" font-family="Poppins, Segoe UI, sans-serif" font-size="18" text-anchor="middle">
+    Cartelera de Cine
+  </text>
+</svg>
