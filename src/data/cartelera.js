@@ -19,7 +19,7 @@ const movies = [
     genres: ['Musical', 'Fantasía', 'Drama'],
     runtime: '144 min',
     releaseDate: '2025-11-21',
-    trailer: 'https://www.youtube.com/embed/6DM3tQuhTSk',
+    trailer: 'https://www.youtube.com/embed/vt98AlBDI9Y',
     featured: true,
   },
   {
@@ -35,7 +35,7 @@ const movies = [
     genres: ['Animación', 'Comedia', 'Aventura'],
     runtime: '108 min',
     releaseDate: '2025-11-26',
-    trailer: 'https://www.youtube.com/embed/aCW0JHmKsM0',
+    trailer: 'https://www.youtube.com/embed/J13BsdX7JZU',
   },
   {
     id: 3,
@@ -50,7 +50,7 @@ const movies = [
     genres: ['Acción', 'Ciencia Ficción', 'Terror'],
     runtime: '115 min',
     releaseDate: '2025-11-07',
-    trailer: 'https://www.youtube.com/embed/Y71s5MnOcHw',
+    trailer: 'https://www.youtube.com/embed/43R9l7EkJwE',
   },
   {
     id: 4,
@@ -65,7 +65,7 @@ const movies = [
     genres: ['Acción', 'Ciencia Ficción', 'Thriller'],
     runtime: '111 min',
     releaseDate: '2025-11-14',
-    trailer: 'https://www.youtube.com/embed/V7TqqwMAoYQ',
+    trailer: 'https://www.youtube.com/embed/KD18ddeFuyM',
   },
   {
     id: 5,
@@ -80,7 +80,7 @@ const movies = [
     genres: ['Thriller', 'Acción', 'Misterio'],
     runtime: '130 min',
     releaseDate: '2025-11-14',
-    trailer: 'https://www.youtube.com/embed/348L2TSF0aM',
+    trailer: 'https://www.youtube.com/embed/-E3lMRx7HRQ',
   },
   {
     id: 6,
@@ -95,7 +95,7 @@ const movies = [
     genres: ['Ciencia Ficción', 'Acción', 'Aventura'],
     runtime: '125 min',
     releaseDate: '2025-10-10',
-    trailer: 'https://www.youtube.com/embed/Ftp9cQa3pfA',
+    trailer: 'https://www.youtube.com/embed/zvahPW14Qos',
   },
   {
     id: 7,
@@ -110,7 +110,7 @@ const movies = [
     genres: ['Ciencia Ficción', 'Aventura', 'Fantasía'],
     runtime: '190 min',
     releaseDate: '2025-12-19',
-    trailer: 'https://www.youtube.com/embed/dLcDQVehNWY',
+    trailer: 'https://www.youtube.com/embed/nb_fFj_0rq8',
   },
   {
     id: 8,
@@ -125,7 +125,7 @@ const movies = [
     genres: ['Drama', 'Musical', 'Biografía'],
     runtime: '118 min',
     releaseDate: '2025-10-24',
-    trailer: 'https://www.youtube.com/embed/v1nWSNGqPZc',
+    trailer: 'https://www.youtube.com/embed/oQXdM3J33No',
   },
 ]
 

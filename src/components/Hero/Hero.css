@@ -260,6 +260,10 @@
   transition: all var(--transition-base);
 }
 
+.hero__nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
 .hero__nav:hover,
 .hero__nav:focus-visible {
   background: var(--color-primary);

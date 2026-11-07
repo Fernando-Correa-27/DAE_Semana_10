@@ -28,15 +28,22 @@ function App() {
   const [heroIndex, setHeroIndex] = useState(0)
   const debouncedSearch = useDebounce(searchQuery, 300)
 
-  const list = useMemo(() => moviesData.filter((m) => !m.featured), [])
+  // const list = useMemo(() => moviesData.filter((m) => !m.featured), [])
 
-  // All movies for carousel
-  const carouselMovies = useMemo(() => {
-    const featuredMovies = moviesData.filter((m) => m.featured)
-    if (featuredMovies.length > 0) return featuredMovies
-    // Fallback: use first 3 movies if no featured
-    return moviesData.slice(0, 3)
-  }, [])
+  // const carouselMovies = useMemo(() => {
+  //   const featuredMovies = moviesData.filter((m) => m.featured)
+  //   if (featuredMovies.length > 0) return featuredMovies
+  //   return moviesData.slice(0, 3)
+  // }, [])
+
+  // antes: const list = useMemo(() => moviesData.filter((m) => !m.featured), [])
+  
+  const list = moviesData
+
+  const carouselMovies = useMemo(
+    () => [...moviesData].sort((a, b) => b.score - a.score).slice(0, 5),
+    []
+  )
 
   // Genre list
   const genres = useMemo(() => {
@@ -88,15 +95,14 @@ function App() {
   }, [])
 
   // Carousel auto-rotation
-  useEffect(() => {
+    useEffect(() => {
     if (carouselMovies.length <= 1) return
-
-    const interval = setInterval(() => {
-      setHeroIndex((prev) => (prev + 1) % carouselMovies.length)
-    }, 6000)
-
-    return () => clearInterval(interval)
-  }, [carouselMovies.length])
+    const id = setTimeout(
+      () => setHeroIndex((prev) => (prev + 1) % carouselMovies.length),
+      6000
+    )
+    return () => clearTimeout(id)
+  }, [heroIndex, carouselMovies.length])
 
   // Pause on page hidden
   useEffect(() => {

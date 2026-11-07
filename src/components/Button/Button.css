@@ -25,11 +25,11 @@
     opacity var(--transition-fast);
 }
 
-.btn:hover:not(:disabled) {
+.btn:where(:hover:not(:disabled)) {
   transform: translateY(-1px);
 }
 
-.btn:active:not(:disabled) {
+.btn:where(:active:not(:disabled)) {
   transform: translateY(0);
 }
 
